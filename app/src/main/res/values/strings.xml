@@ -5,4 +5,7 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="don_t_have_an_account_register_here">Don\'t have an account? <font fgcolor="red">Register Here.</font></string>
+    <string name="signup_to_order_tasty_food_today">SignUp to order tasty food today!</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account_login">Already have an account? <font fgcolor="red">Login Here!.</font></string>
 </resources>
