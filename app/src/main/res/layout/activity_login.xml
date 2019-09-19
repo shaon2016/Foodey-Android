@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    android:layout_height="match_parent"
+    tools:context=".activities.LoginActivity">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:orientation="vertical"
+       android:layout_height="wrap_content">
+
+       <ImageView
+           android:layout_marginTop="16dp"
+           android:layout_gravity="center_horizontal"
+           android:src="@drawable/beats"
+           android:layout_width="150dp"
+           android:layout_height="150dp"/>
+
+       <TextView
+           android:textSize="16sp"
+           android:gravity="center_horizontal"
+           android:text="@string/login_to_order_tasty_food_today"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+
+       <EditText
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"
+           android:hint="@string/email"
+           android:layout_marginTop="36dp"
+           android:id="@+id/evEmail"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+
+       <EditText
+           android:layout_marginStart="24dp"
+           android:layout_marginEnd="24dp"
+           android:padding="16dp"
+           android:hint="@string/password"
+           android:layout_marginTop="24dp"
+           android:id="@+id/evPassword"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+
+       <Button
+           android:layout_marginStart="42dp"
+           android:layout_marginEnd="42dp"
+           android:textColor="@android:color/white"
+           android:background="@android:color/holo_red_light"
+           android:layout_marginTop="36dp"
+           android:text="@string/login"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+
+       <TextView
+           android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+           android:textSize="16sp"
+           android:gravity="center_horizontal"
+           android:layout_marginTop="36dp"
+           android:text="@string/don_t_have_an_account_register_here"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+   </LinearLayout>
+</ScrollView>

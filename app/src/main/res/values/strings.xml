@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Foodey</string>
+    <string name="login_to_order_tasty_food_today">Login to order tasty food today!</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_register_here">Don\'t have an account? <font fgcolor="red">Register Here.</font></string>
 </resources>
