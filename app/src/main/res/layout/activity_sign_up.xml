@@ -3,74 +3,99 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@android:color/white"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".activities.LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <ImageView
-            android:layout_marginTop="16dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/beats"
             android:layout_width="150dp"
-            android:layout_height="150dp"/>
+            android:layout_height="150dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/beats" />
 
         <TextView
-            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@string/signup_to_order_tasty_food_today"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:textSize="16sp" />
 
         <EditText
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:hint="@string/email"
-            android:layout_marginTop="36dp"
             android:id="@+id/evName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <EditText
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
+            android:layout_marginTop="36dp"
             android:layout_marginEnd="24dp"
-            android:hint="@string/email"
-            android:layout_marginTop="24dp"
+            android:hint="@string/name"
+            android:padding="16dp" />
+
+        <EditText
             android:id="@+id/evEmail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/email"
+            android:padding="16dp" />
 
         <EditText
-            android:inputType="textPassword"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:padding="16dp"
-            android:hint="@string/password"
-            android:layout_marginTop="24dp"
             android:id="@+id/evPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:padding="16dp" />
 
-        <Button
-            android:layout_marginStart="42dp"
-            android:layout_marginEnd="42dp"
-            android:textColor="@android:color/white"
-            android:background="@android:color/holo_red_light"
-            android:layout_marginTop="36dp"
-            android:text="@string/register"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="42dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="42dp"
+                android:background="@android:color/holo_red_light"
+                android:text="@string/register"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="@id/btnRegister"
+                app:layout_constraintStart_toStartOf="@id/btnRegister"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:indeterminateTint="@android:color/white"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:elevation="2dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="16sp"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="36dp"
-            android:text="@string/already_have_an_account_login"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:gravity="center_horizontal"
+            android:text="@string/already_have_an_account_login"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="16sp" />
     </LinearLayout>
 </ScrollView>

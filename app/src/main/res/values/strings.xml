@@ -8,4 +8,5 @@
     <string name="signup_to_order_tasty_food_today">SignUp to order tasty food today!</string>
     <string name="register">Register</string>
     <string name="already_have_an_account_login">Already have an account? <font fgcolor="red">Login Here!.</font></string>
+    <string name="name">Name</string>
 </resources>
