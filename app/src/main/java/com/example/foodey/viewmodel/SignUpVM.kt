@@ -9,8 +9,8 @@ class SignupVM : ViewModel() {
     private val name_ = MutableLiveData<String>()
     val name: LiveData<String> = name_
 
-    private val email_ = MutableLiveData<String>()
-    val email: LiveData<String> = email_
+    private val mobile_ = MutableLiveData<String>()
+    val mobile: LiveData<String> = mobile_
 
     private val password_ = MutableLiveData<String>()
     val password: LiveData<String> = password_

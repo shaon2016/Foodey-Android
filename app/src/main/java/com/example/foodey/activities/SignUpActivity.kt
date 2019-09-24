@@ -33,9 +33,9 @@ class SignUpActivity : AppCompatActivity() {
             // Update the view
             evName.setText(name)
         })
-        signUpVM.email.observe(this, Observer { email ->
+        signUpVM.mobile.observe(this, Observer { mobile ->
             // Update the view
-            evEmail.setText(email)
+            evMobile.setText(mobile)
         })
         signUpVM.password.observe(this, Observer { pw ->
             // Update the view
