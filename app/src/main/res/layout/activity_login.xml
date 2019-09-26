@@ -47,6 +47,7 @@
            android:layout_height="wrap_content"/>
 
        <Button
+           android:id="@+id/btnLogin"
            android:layout_marginStart="42dp"
            android:layout_marginEnd="42dp"
            android:textColor="@android:color/white"
@@ -57,7 +58,6 @@
            android:layout_height="wrap_content"/>
 
        <TextView
-           android:id="@+id/btnLogin"
            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
            android:textSize="16sp"
            android:gravity="center_horizontal"

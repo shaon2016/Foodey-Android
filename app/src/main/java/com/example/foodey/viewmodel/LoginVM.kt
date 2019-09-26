@@ -20,7 +20,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginVM (application: Application): AndroidViewModel(application) {
+class LoginVM(application: Application) : AndroidViewModel(application) {
 
     private val mobile_ = MutableLiveData<String>()
     val mobile: LiveData<String> = mobile_
@@ -34,56 +34,81 @@ class LoginVM (application: Application): AndroidViewModel(application) {
     private val toastMsg_ = MutableLiveData<String>()
     val toastMsg: LiveData<String> = toastMsg_
 
+    private val redirectToHomePage_ = MutableLiveData<Boolean>()
+    val redirectToHomePage: LiveData<Boolean> = redirectToHomePage_
+
 
     fun login() {
 
+        if (isLoginValidate()) {
+            // do login
+            // show progress bar
+            isDataLoading_.value = true
+            // save data to server
 
-        // show progress bar
-        isDataLoading_.value = true
-        // save data to server
+            val apiService = RetroClient.getInstance().create(APIService::class.java)
 
-        val apiService = RetroClient.getInstance().create(APIService::class.java)
+            apiService.login(mobile_.value!!, password_.value!!)
+                .enqueue(object : Callback<User> {
+                    override fun onFailure(call: Call<User>, t: Throwable) {
+                        isDataLoading_.value = false
+                        toastMsg_.value = "Server error"
 
-        apiService.login(mobile_.value!!, password_.value!!)
-            .enqueue(object : Callback<User> {
-                override fun onFailure(call: Call<User>, t: Throwable) {
-
-                }
-
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful) {
-                        val user = response.body()
-
-                        user?.let { u ->
-                            val msg = u.msg
-
-                            when(u.succeess) {
-                                0 -> {
-                                    toastMsg_.value = msg
-                                }
-
-                                1 -> {
-                                    u.id = u.succeess
-                                    P.saveLoginResponse( getApplication(), u)
-                                    toastMsg_.value = msg
-                                }
-                            }
-                        }
-
-                    } else {
-
+                        t.printStackTrace()
                     }
 
-                }
-            })
+                    override fun onResponse(call: Call<User>, response: Response<User>) {
+                        isDataLoading_.value = false
 
-        // in response callback save data to shared pref or local db
+                        if (response.isSuccessful) {
+                            val user = response.body()
 
-        // hide pb
+                            user?.let { u ->
+                                val msg = u.msg
 
-        // redirect to home page
+                                when (u.succeess) {
+                                    0 -> {
+                                        toastMsg_.value = msg
+                                    }
+
+                                    1 -> {
+                                        u.id = u.succeess
+                                        P.saveLoginResponse(getApplication(), u)
+                                        toastMsg_.value = msg
+                                        redirectToHomePage_.value = true
+                                    }
+                                    else -> {
+
+                                    }
+                                }
+                            }
+
+                        } else {
+                            toastMsg_.value = "Login is not successfull"
+
+                        }
+
+                    }
+                })
 
 
+        } else {
+            toastMsg_.value = "Mobile and password is empty"
+        }
+
+
+    }
+
+    private fun isLoginValidate(): Boolean {
+        return !U.isStrEmpty(mobile_.value) && !U.isStrEmpty(password_.value)
+    }
+
+    fun setMobileValue(mobileStr: String) {
+        mobile_.value = mobileStr
+    }
+
+    fun setPasswordValue(passStr: String) {
+        password_.value = passStr
     }
 
 }

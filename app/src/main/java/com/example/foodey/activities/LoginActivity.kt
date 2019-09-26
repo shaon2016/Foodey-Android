@@ -1,5 +1,6 @@
 package com.example.foodey.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.foodey.R
+import com.example.foodey.data.P
 import com.example.foodey.util.obtainViewModel
 import com.example.foodey.viewmodel.LoginVM
 import kotlinx.android.synthetic.main.activity_login.*
@@ -22,12 +24,17 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
+        if (P.isLoggedIn(this)) {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        } else {
+            initVar()
 
-        initVar()
+            initView()
+        }
 
-        initView()
+
     }
-
 
 
     private fun initVar() {
@@ -35,8 +42,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        loginVM.toastMsg.observe(this, Observer {msg->
+        loginVM.toastMsg.observe(this, Observer { msg ->
             Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
+        })
+
+        loginVM.redirectToHomePage.observe(this, Observer {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
         })
 
         handleButton()
@@ -44,6 +56,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun handleButton() {
         btnLogin.setOnClickListener {
+            loginVM.setMobileValue(evMobile.text.toString())
+            loginVM.setPasswordValue(evPassword.text.toString())
             loginVM.login()
         }
     }
