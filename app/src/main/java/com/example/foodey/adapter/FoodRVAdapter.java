@@ -1,6 +1,7 @@
 package com.example.foodey.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,8 +69,6 @@ public class FoodRVAdapter extends RecyclerView.Adapter<FoodRVAdapter.MyFoodVH> 
     }
 
     class MyFoodVH extends RecyclerView.ViewHolder {
-
-
         TextView tvTitle;
         private TextView tvPrice;
         private ImageView ivFood;
@@ -82,13 +81,23 @@ public class FoodRVAdapter extends RecyclerView.Adapter<FoodRVAdapter.MyFoodVH> 
             ivFood = v.findViewById(R.id.ivFood);
         }
 
-        private void bind(Food f) {
+        private void bind(final Food f) {
             tvTitle.setText(f.getName());
             tvPrice.setText(f.getPrice());
 
             Glide.with(mContext)
                     .load(f.getImage())
                     .into(ivFood);
+
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent();
+                    i.putExtra("food", f);
+                    mContext.startActivity(i);
+                }
+            });
         }
     }
 }

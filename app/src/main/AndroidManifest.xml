@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.CartActivity"></activity>
+        <activity android:name=".activities.FoodDetailsActivity"></activity>
+        <activity android:name=".activities.CartActivity" />
         <activity
             android:name=".activities.SignUpActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

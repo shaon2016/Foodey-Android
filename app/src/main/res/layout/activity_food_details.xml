@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.FoodDetailsActivity">
+
+    <ScrollView
+
+        android:layout_above="@id/btnAddToCart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:id="@+id/btnAddToCart"
+        android:padding="12dp"
+        android:background="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_cart"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
