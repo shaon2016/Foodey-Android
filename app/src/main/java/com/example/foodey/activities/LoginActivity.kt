@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
@@ -49,6 +50,10 @@ class LoginActivity : AppCompatActivity() {
         loginVM.redirectToHomePage.observe(this, Observer {
             startActivity(Intent(this, HomeActivity::class.java))
             finish()
+        })
+
+        loginVM.isDataLoading.observe(this, Observer {isLoading->
+            if(isLoading) pbLogin.visibility = View.VISIBLE else View.GONE
         })
 
         handleButton()

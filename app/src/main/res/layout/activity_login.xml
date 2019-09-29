@@ -46,16 +46,41 @@
            android:layout_width="match_parent"
            android:layout_height="wrap_content"/>
 
-       <Button
-           android:id="@+id/btnLogin"
-           android:layout_marginStart="42dp"
-           android:layout_marginEnd="42dp"
-           android:textColor="@android:color/white"
-           android:background="@android:color/holo_red_light"
-           android:layout_marginTop="36dp"
-           android:text="@string/login"
+
+
+       <androidx.constraintlayout.widget.ConstraintLayout
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"/>
+           android:layout_height="wrap_content">
+
+           <Button
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               android:id="@+id/btnLogin"
+               android:layout_marginStart="42dp"
+               android:layout_marginEnd="42dp"
+               android:textColor="@android:color/white"
+               android:background="@android:color/holo_red_light"
+               android:layout_marginTop="36dp"
+               android:text="@string/login"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
+
+
+           <ProgressBar
+               android:id="@+id/pbLogin"
+               android:layout_marginStart="8dp"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintTop_toTopOf="@id/btnLogin"
+               app:layout_constraintStart_toStartOf="@id/btnLogin"
+               android:layout_width="32dp"
+               android:layout_height="32dp"
+               android:indeterminateTint="@android:color/white"
+               android:layout_gravity="center"
+               android:visibility="gone"
+               android:elevation="2dp" />
+       </androidx.constraintlayout.widget.ConstraintLayout>
 
        <TextView
            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
