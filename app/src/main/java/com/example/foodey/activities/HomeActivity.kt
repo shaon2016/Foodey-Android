@@ -1,5 +1,6 @@
 package com.example.foodey.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -29,7 +30,21 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setNavView() {
 
-        
+        nav_view.setNavigationItemSelectedListener {
+            when(it.itemId) {
+                R.id.nav_home -> {
+
+                    true
+                }
+                R.id.nav_logout -> {
+                    P.signOut(this)
+                    startActivity(Intent(this, LoginActivity::class.java))
+                    finish()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
 }

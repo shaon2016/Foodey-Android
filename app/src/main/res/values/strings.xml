@@ -16,4 +16,5 @@
     <string name="home">Home</string>
     <string name="_1">1</string>
     <string name="add_to_cart">Add to Cart</string>
+    <string name="logout">Log Out</string>
 </resources>

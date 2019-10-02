@@ -10,7 +10,7 @@ interface CartItemDao {
     fun insert(cartItem: CartItem)
 
     @Delete
-    fun delete()
+    fun delete(cartItem: CartItem)
 
 
 
