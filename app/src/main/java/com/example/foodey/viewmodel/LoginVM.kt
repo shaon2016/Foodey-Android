@@ -1,21 +1,14 @@
 package com.example.foodey.viewmodel
 
 import android.app.Application
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodey.data.P
-import com.example.foodey.models.User
+import com.example.foodey.models.UserSync
 import com.example.foodey.server_client.APIService
 import com.example.foodey.server_client.RetroClient
 import com.example.foodey.util.U
-import okhttp3.ResponseBody
-import org.json.JSONException
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,6 +42,49 @@ class LoginVM(application: Application) : AndroidViewModel(application) {
             val apiService = RetroClient.getInstance().create(APIService::class.java)
 
             apiService.login(mobile_.value!!, password_.value!!)
+                .enqueue(object : Callback<UserSync> {
+                    override fun onFailure(call: Call<UserSync>, t: Throwable) {
+                        isDataLoading_.value = false
+                        toastMsg_.value = "Server error"
+
+                        t.printStackTrace()
+                    }
+
+                    override fun onResponse(call: Call<UserSync>, response: Response<UserSync>) {
+                        isDataLoading_.value = false
+
+                        if (response.isSuccessful) {
+                            val userSync = response.body()
+
+                            userSync?.let { u ->
+                                val msg = u.msg
+
+                                when (u.succeess) {
+                                    0 -> {
+                                        toastMsg_.value = msg
+                                    }
+
+                                    1 -> {
+                                        val user = userSync.user
+                                        P.saveLoginResponse(getApplication(), user)
+                                        toastMsg_.value = msg
+                                        redirectToHomePage_.value = true
+                                    }
+                                    else -> {
+
+                                    }
+                                }
+                            }
+
+                        } else {
+                            toastMsg_.value = "Login is not successfull"
+
+                        }
+                    }
+
+                })
+
+            /*apiService.login(mobile_.value!!, password_.value!!)
                 .enqueue(object : Callback<User> {
                     override fun onFailure(call: Call<User>, t: Throwable) {
                         isDataLoading_.value = false
@@ -91,7 +127,7 @@ class LoginVM(application: Application) : AndroidViewModel(application) {
                     }
                 })
 
-
+*/
         } else {
             toastMsg_.value = "Mobile and password is empty"
         }

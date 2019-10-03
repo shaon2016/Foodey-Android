@@ -115,6 +115,7 @@ object P {
 
         prefsEditor?.putInt(PREF_USER_ID, user.id)
         prefsEditor?.putString(PREF_USER_NAME, user.name)
+        prefsEditor?.putString(PREF_USER_MOBILE, user.mobile)
 
         prefsEditor?.apply()
     }
@@ -124,10 +125,7 @@ object P {
 
         prefsEditor?.remove(PREF_USER_ID)
         prefsEditor?.remove(PREF_USER_NAME)
-        prefsEditor?.remove(PREF_USER_EMAIL)
         prefsEditor?.remove(PREF_USER_MOBILE)
-        prefsEditor?.remove(PREF_API_TOKEN)
-
 
         prefsEditor?.apply()
     }

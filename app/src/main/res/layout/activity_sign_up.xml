@@ -77,6 +77,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ProgressBar
+                android:id="@+id/pbSignup"
                 android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="@id/btnRegister"

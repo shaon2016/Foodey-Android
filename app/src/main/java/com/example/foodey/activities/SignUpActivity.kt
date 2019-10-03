@@ -1,8 +1,11 @@
 package com.example.foodey.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.foodey.R
 import com.example.foodey.util.obtainViewModel
@@ -18,9 +21,7 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up)
 
         initVar()
-
         initView()
-
     }
 
     private fun initView() {
@@ -29,30 +30,26 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun observeAndUpdateView() {
-        signUpVM.name.observe(this, Observer { name ->
-            // Update the view
-            evName.setText(name)
+        signUpVM.isDataLoading.observe(this, Observer { isLoading ->
+            if (isLoading) pbSignup.visibility = View.VISIBLE else View.GONE
         })
-        signUpVM.mobile.observe(this, Observer { mobile ->
-            // Update the view
-            evMobile.setText(mobile)
-        })
-        signUpVM.password.observe(this, Observer { pw ->
-            // Update the view
-            evPassword.setText(pw)
-        })
-        signUpVM.isDataLoading.observe(this, Observer { toShowProgressBar ->
-            // Update the view
-            if (toShowProgressBar) {
 
-            } else {
-
-            }
+        signUpVM.toastMsg.observe(this, Observer { msg ->
+            Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
         })
+
+        signUpVM.redirectToHomePage.observe(this, Observer {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        })
+
     }
 
     private fun handleButton() {
         btnRegister.setOnClickListener {
+            signUpVM.setMobileValue(evMobile.text.toString())
+            signUpVM.setPasswordValue(evPassword.text.toString())
+            signUpVM.setNameValue(evName.text.toString())
             signUpVM.register()
         }
     }

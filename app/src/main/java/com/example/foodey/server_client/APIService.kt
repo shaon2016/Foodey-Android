@@ -2,6 +2,7 @@ package com.example.foodey.server_client
 
 import com.example.foodey.models.FoodSync
 import com.example.foodey.models.User
+import com.example.foodey.models.UserSync
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
@@ -18,9 +19,17 @@ interface APIService {
         @Field("mobile") mb : String,
         @Field("password") password : String
 
-              ) : Call<User>
+              ) : Call<UserSync>
 
 
     @GET("data.php")
     fun getFoods() : Call<FoodSync>
+
+    @FormUrlEncoded
+    @POST("login/views/signup.php")
+    fun signUp(
+        @Field("name") name: String,
+        @Field("mobile")  mobile: String,
+        @Field("password") passW: String) : Call<UserSync>
+
 }
