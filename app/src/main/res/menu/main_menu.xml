@@ -5,6 +5,9 @@
     <item
         android:id="@+id/nav_home"
         android:title="@string/home" />
+    <item
+        android:id="@+id/nav_order_list"
+        android:title="@string/order_list" />
 
     <item
         android:id="@+id/nav_logout"
