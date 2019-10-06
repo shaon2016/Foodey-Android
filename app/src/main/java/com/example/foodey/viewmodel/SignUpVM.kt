@@ -60,7 +60,7 @@ class SignupVM(application: Application) : AndroidViewModel(application) {
                             userSync?.let { u ->
                                 val msg = u.msg
 
-                                when (u.succeess) {
+                                when (u.success) {
                                     0 -> {
                                         toastMsg_.value = msg
                                     }
