@@ -1,6 +1,7 @@
 package com.example.foodey.fragments
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,12 +9,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.androidbatch4day7.data.db.AppDb
 
 import com.example.foodey.R
 import com.example.foodey.adapter.FoodRVAdapter
+import com.example.foodey.models.Food
 import com.example.foodey.models.FoodSync
 import com.example.foodey.server_client.APIService
 import com.example.foodey.server_client.RetroClient
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -61,6 +67,7 @@ class HomeFragment : Fragment() {
                             when (fs.success) {
                                 1-> {
                                     foodAdapter.addUniquely(fs.foods)
+                                    insertIntoFoodTable(fs.foods)
                                 }
                                 0-> {
 
@@ -78,6 +85,13 @@ class HomeFragment : Fragment() {
             })
 
 
+    }
+
+    @SuppressLint("CheckResult")
+    private fun insertIntoFoodTable(foods: java.util.ArrayList<Food>) {
+        Thread {
+            AppDb.getInstance(context!!).foodDao().insertAll(foods)
+        }.start()
     }
 
     private fun initVar() {

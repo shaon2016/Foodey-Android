@@ -83,6 +83,7 @@
        </androidx.constraintlayout.widget.ConstraintLayout>
 
        <TextView
+           android:id="@+id/btnRegisterHere"
            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
            android:textSize="16sp"
            android:gravity="center_horizontal"

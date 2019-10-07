@@ -9,12 +9,12 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.foodey.R
 import com.example.foodey.util.obtainViewModel
-import com.example.foodey.viewmodel.SignupVM
+import com.example.foodey.viewmodel.SignUpVM
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var signUpVM: SignupVM
+    private lateinit var signUpVM: SignUpVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +55,7 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun initVar() {
-        signUpVM = obtainViewModel(SignupVM::class.java)
+        signUpVM = obtainViewModel(SignUpVM::class.java)
     }
 
 }

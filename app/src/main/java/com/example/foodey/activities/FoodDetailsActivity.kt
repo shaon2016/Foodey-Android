@@ -2,9 +2,13 @@
 package com.example.foodey.activities
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.androidbatch4day7.data.db.AppDb
 import com.example.foodey.R
 import com.example.foodey.models.CartItem
@@ -28,6 +32,14 @@ class FoodDetailsActivity : AppCompatActivity() {
         btnAddToCart.setOnClickListener {
             saveIntoCart()
         }
+
+        tvTitleDetails.text = f.name
+        tvPriceDetails.text = "${f.price} BDT"
+        tvDescDetails.text = "${f.desc}"
+        Glide.with(this)
+            .load(f.image)
+            .into(ivFoodDetails)
+
     }
 
     @SuppressLint("CheckResult")
@@ -43,4 +55,19 @@ class FoodDetailsActivity : AppCompatActivity() {
                 it.printStackTrace()
             })
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.main_cart -> {
+                startActivity(Intent(this, CartActivity::class.java))
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }

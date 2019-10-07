@@ -18,4 +18,5 @@
     <string name="add_to_cart">Add to Cart</string>
     <string name="logout">Log Out</string>
     <string name="order_list">Order List</string>
+    <string name="cart">Cart</string>
 </resources>

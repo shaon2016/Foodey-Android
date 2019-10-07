@@ -15,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SignupVM(application: Application) : AndroidViewModel(application) {
+class SignUpVM(application: Application) : AndroidViewModel(application) {
 
     private val name_ = MutableLiveData<String>()
 

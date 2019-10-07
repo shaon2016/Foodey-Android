@@ -65,5 +65,9 @@ class LoginActivity : AppCompatActivity() {
             loginVM.setPasswordValue(evPassword.text.toString())
             loginVM.login()
         }
+
+        btnRegisterHere.setOnClickListener {
+            startActivity(Intent(this, SignUpActivity::class.java))
+        }
     }
 }
