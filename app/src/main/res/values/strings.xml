@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Foodey</string>
+    <string name="app_name">The Foodey</string>
     <string name="login_to_order_tasty_food_today">Login to order tasty food today!</string>
     <string name="email">Email</string>
     <string name="password">Password</string>

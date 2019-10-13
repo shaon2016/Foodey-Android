@@ -25,15 +25,9 @@ class LoginActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_login)
 
-        if (P.isLoggedIn(this)) {
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish()
-        } else {
-            initVar()
+        initVar()
 
-            initView()
-        }
-
+        initView()
 
     }
 
