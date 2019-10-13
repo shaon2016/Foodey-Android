@@ -57,15 +57,14 @@ public class FoodRVAdapter extends RecyclerView.Adapter<FoodRVAdapter.MyFoodVH> 
     public void addUniquely(@NotNull ArrayList<Food> newFoods) {
         ArrayList<Food> oldFoods = items;
 
-//        for (int i = 0; i < newFoods.size(); i++ ) {
-//            for (int j = 0 ; j < oldFoods.size(); j++) {
-//                if (oldFoods.get(j).getId() != newFoods.get(i).getId() ) {
-//                    items.add(newFoods.get(j));
-//                }
-//            }
-//        }
+        for (int i = 0; i < newFoods.size(); i++ ) {
+            for (int j = 0 ; j < oldFoods.size(); j++) {
+                if (oldFoods.get(j).getId() != newFoods.get(i).getId() ) {
+                    items.add(newFoods.get(j));
+                }
+            }
+        }
 
-        items.addAll(newFoods);
         notifyDataSetChanged();
     }
 
@@ -95,7 +94,7 @@ public class FoodRVAdapter extends RecyclerView.Adapter<FoodRVAdapter.MyFoodVH> 
                 @Override
                 public void onClick(View view) {
                     Intent i = new Intent(mContext, FoodDetailsActivity.class);
-                    i.putExtra("food", f);
+                    i.putExtra("getCartItem", f);
                     mContext.startActivity(i);
                 }
             });

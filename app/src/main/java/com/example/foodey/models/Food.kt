@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-@Entity(tableName = "food")
+@Entity(tableName = "getCartItem")
 data class Food(
     @PrimaryKey(autoGenerate = false) var id:Int,
     @ColumnInfo(name = "name") var name:String,

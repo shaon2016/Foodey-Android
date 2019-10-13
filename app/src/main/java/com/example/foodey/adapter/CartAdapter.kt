@@ -8,11 +8,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.androidbatch4day7.data.db.AppDb
 import com.example.foodey.R
 import com.example.foodey.models.CartItem
 
 
-class CartAdapter(val context: Context, val items: ArrayList<CartItem>) :
+class CartAdapter(
+    val context: Context,
+    val items: ArrayList<CartItem>,
+    private val db: AppDb
+) :
     RecyclerView.Adapter<CartAdapter.MyCartVH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCartVH {
@@ -27,6 +32,16 @@ class CartAdapter(val context: Context, val items: ArrayList<CartItem>) :
 
     private fun getItem(position: Int): CartItem {
         return items[position]
+    }
+
+    private fun addAll(cartItems: List<CartItem>) {
+        items.addAll(cartItems)
+        notifyDataSetChanged()
+    }
+
+    fun refreshWith(items: List<CartItem>) {
+        this.items.clear()
+        addAll(items)
     }
 
     inner class MyCartVH(v: View) : RecyclerView.ViewHolder(v) {
@@ -50,13 +65,21 @@ class CartAdapter(val context: Context, val items: ArrayList<CartItem>) :
                 if (ct.quantity >  1) {
                     ct.quantity--
                     setQuantityToView(ct.quantity)
+                    updateCT(ct)
                 }
             }
 
             ivQuantityIncrement.setOnClickListener {
                 ct.quantity++
                 setQuantityToView(ct.quantity)
+                updateCT(ct)
             }
+        }
+
+        private fun updateCT(ct: CartItem) {
+            Thread {
+                db.cartItemDao().insert(ct)
+            }.start()
         }
 
         private fun setQuantityToView(quantity: Int) {

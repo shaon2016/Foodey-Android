@@ -22,7 +22,7 @@ abstract class AppDb : RoomDatabase() {
 
         private fun create(context: Context) = Room.databaseBuilder(
             context,
-            AppDb::class.java, "food"
+            AppDb::class.java, "getCartItem"
         )
             .allowMainThreadQueries()
             .build()

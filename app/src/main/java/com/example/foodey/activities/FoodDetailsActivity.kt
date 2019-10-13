@@ -1,4 +1,3 @@
-
 package com.example.foodey.activities
 
 import android.annotation.SuppressLint
@@ -20,13 +19,13 @@ import kotlinx.android.synthetic.main.activity_food_details.*
 
 class FoodDetailsActivity : AppCompatActivity() {
 
-    private lateinit var f : Food
+    private lateinit var f: Food
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_details)
 
-        f = intent?.extras?.getSerializable("food") as Food
+        f = intent?.extras?.getSerializable("getCartItem") as Food
 
 
         btnAddToCart.setOnClickListener {
@@ -45,13 +44,21 @@ class FoodDetailsActivity : AppCompatActivity() {
     @SuppressLint("CheckResult")
     private fun saveIntoCart() {
         Observable.fromCallable {
-            val ci = CartItem(f.id)
-            AppDb.getInstance(this).cartItemDao().insert(ci)
+            val cartItemDao = AppDb.getInstance(this).cartItemDao()
+            // Checking getCartItem already exists or not
+            var cartItem = cartItemDao.getCartItem(f.id)
+
+            if (cartItem != null && cartItem.id > 0) {
+                cartItem.quantity++
+            } else {
+                cartItem = CartItem(f.id, 1)
+            }
+            cartItemDao.insert(cartItem)
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show()
-            },{
+            }, {
                 it.printStackTrace()
             })
     }
@@ -62,7 +69,7 @@ class FoodDetailsActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.main_cart -> {
                 startActivity(Intent(this, CartActivity::class.java))
             }

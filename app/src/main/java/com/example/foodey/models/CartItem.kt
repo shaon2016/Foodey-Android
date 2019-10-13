@@ -18,5 +18,5 @@ data class CartItem(
 ) {
 
 
-    constructor(foodId: Int) : this(null, foodId, 1)
+    constructor(foodId: Int, quantity: Int) : this(null, foodId, quantity)
 }

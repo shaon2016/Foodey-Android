@@ -16,9 +16,9 @@ interface FoodDao {
     @Delete
     fun delete(food: Food)
 
-    @Query("select * from food")
+    @Query("select * from getCartItem")
     fun all(): List<Food>
 
-    @Query("select * from food where id = :foodId")
+    @Query("select * from getCartItem where id = :foodId")
     fun food(foodId: Int): Food
 }

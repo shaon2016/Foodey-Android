@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidbatch4day7.data.db.AppDb
 import com.example.foodey.R
 import com.example.foodey.adapter.CartAdapter
-import com.example.foodey.models.CartItem
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_cart.*
 
 class CartActivity : AppCompatActivity() {
+    private lateinit var db : AppDb
     private lateinit var adapter: CartAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +24,8 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+
         rvCartItems.layoutManager = LinearLayoutManager(this)
-        val db = AppDb.getInstance(this)
         db.cartItemDao().all().observe(this, Observer { cts ->
             cts?.let {
                 Observable.fromCallable {
@@ -38,7 +38,7 @@ class CartActivity : AppCompatActivity() {
                 }.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe {
-                        adapter = CartAdapter(this, cts as ArrayList<CartItem>)
+                        adapter.refreshWith(it)
                         rvCartItems.adapter = adapter
                     }
             }
@@ -47,6 +47,8 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun initVar() {
+        db = AppDb.getInstance(this)
+        adapter = CartAdapter(this, ArrayList(), db)
 
     }
 
