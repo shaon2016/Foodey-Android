@@ -58,10 +58,17 @@ public class FoodRVAdapter extends RecyclerView.Adapter<FoodRVAdapter.MyFoodVH> 
         ArrayList<Food> oldFoods = items;
 
         for (int i = 0; i < newFoods.size(); i++ ) {
+            boolean isExists = false;
             for (int j = 0 ; j < oldFoods.size(); j++) {
-                if (oldFoods.get(j).getId() != newFoods.get(i).getId() ) {
-                    items.add(newFoods.get(j));
+                if (oldFoods.get(j).getId() == newFoods.get(i).getId() ) {
+                    // Exists in old food list
+                    isExists = true;
+                    break;
                 }
+            }
+            // Adding new food to view
+            if (!isExists)  {
+                items.add(newFoods.get(i));
             }
         }
 

@@ -39,6 +39,11 @@ class CartAdapter(
         notifyDataSetChanged()
     }
 
+    fun addUniquely(newItems: List<CartItem>) {
+
+    }
+
+
     fun refreshWith(items: List<CartItem>) {
         this.items.clear()
         addAll(items)
