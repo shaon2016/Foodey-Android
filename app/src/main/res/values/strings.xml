@@ -19,4 +19,11 @@
     <string name="logout">Log Out</string>
     <string name="order_list">Order List</string>
     <string name="cart">Cart</string>
+    <string name="CheckOut">Checkout</string>
+    <string name="SubTotal">Subtotal</string>
+    <string name="Vat">Vat</string>
+    <string name="payable">Payable</string>
+    <string name="discount">Discount</string>
+    <string name="delivery_charge">Delivery Charge</string>
+    <string name="Total">Payable</string>
 </resources>
