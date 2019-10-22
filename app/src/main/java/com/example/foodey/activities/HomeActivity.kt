@@ -28,6 +28,7 @@ import retrofit2.Response
 
 class HomeActivity : AppCompatActivity() {
 
+    private var isOrderPosted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,15 +36,20 @@ class HomeActivity : AppCompatActivity() {
 
         setNavView()
         configureToolbar()
-        initHomePage()
+
+        isOrderPosted = intent?.extras?.getBoolean("is_order_posted") ?: false
+        if (isOrderPosted) initOrderListPage()
+        else initHomePage()
     }
 
     private fun configureToolbar() {
+
         setSupportActionBar(toolbar)
         val actionbar = supportActionBar
         actionbar?.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp)
         actionbar?.setDisplayHomeAsUpEnabled(true)
         toolbar?.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
+
     }
 
 

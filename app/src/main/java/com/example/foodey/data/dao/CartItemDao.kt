@@ -19,5 +19,8 @@ interface CartItemDao {
     @Query("select * from cart_item where food_id = :foodId")
     fun getCartItem(foodId:Int) : CartItem?
 
+    @Query("delete from cart_item")
+    fun deleteAll()
+
 
 }

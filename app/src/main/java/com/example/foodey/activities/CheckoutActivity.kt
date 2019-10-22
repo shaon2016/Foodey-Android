@@ -5,19 +5,30 @@ import android.os.Bundle
 
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.afollestad.materialdialogs.MaterialDialog
 import com.example.androidbatch4day7.data.db.AppDb
 import com.example.foodey.R
 import com.example.foodey.adapter.CheckOutAdapter
+import com.example.foodey.data.P
 import com.example.foodey.models.CartItem
+import com.example.foodey.models.OrderPostSync
+import com.example.foodey.server_client.APIService
+import com.example.foodey.server_client.RetroClient
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_checkout.*
 import kotlinx.android.synthetic.main.my_toolbar.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CheckoutActivity : AppCompatActivity() {
 
@@ -25,6 +36,9 @@ class CheckoutActivity : AppCompatActivity() {
     lateinit var db: AppDb
 
     lateinit var cart_Items: ArrayList<CartItem>
+    private var totalPrice = 0.0
+    private var discount = 0.0
+    private var vat = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,21 +98,21 @@ class CheckoutActivity : AppCompatActivity() {
 
         tvSubTotal.text = sub_Total.toString() + "BDT"
 
-        val vat = sub_Total * .15
+        vat = sub_Total * .15
         tvVat.text = vat.toString() + "BDT"
 
         val payable = sub_Total + vat
         tvPayable.text = payable.toString() + "BDT"
 
-        val Discount = 100
-        tvDiscount.text = "$Discount BDT"
+        discount = 100.0
+        tvDiscount.text = "$discount BDT"
 
 
         val DeliveryCharge = 50
         tvDeliveryCharge.text = "$DeliveryCharge BDT"
 
-        val totalAmount = payable - Discount + DeliveryCharge
-        tvTotal.text = "$totalAmount + BDT"
+        totalPrice = payable - discount + DeliveryCharge
+        tvTotal.text = "$totalPrice + BDT"
 
         var TotalItemPrice = 0.0
         cart_Items.forEach { cts ->
@@ -107,12 +121,12 @@ class CheckoutActivity : AppCompatActivity() {
 
         }
 
-//        var tvTotalItemPrice2 = findViewById<TextView>(R.id.tvTotalItemPrice)
-//        tvTotalItemPrice.text = TotalItemPrice.toString()
-//        Log.d("Datatag", tvTotalItemPrice.toString())
 
-
+        btnPostOrder.setOnClickListener {
+            postOrder()
+        }
     }
+
 
     private fun initVar() {
 
@@ -125,5 +139,61 @@ class CheckoutActivity : AppCompatActivity() {
 
 
     }
+
+    private fun postOrder() {
+        MaterialDialog(this).show {
+            positiveButton {
+                confirmOrder()
+            }
+            negativeButton {
+                dismiss()
+            }
+        }
+    }
+
+    private fun confirmOrder() {
+        val apiService = RetroClient.getInstance().create(APIService::class.java)
+
+        val call = apiService.postOrder(P.getUserId(this), "", totalPrice, discount, vat)
+
+        call.enqueue(object : Callback<OrderPostSync> {
+            override fun onFailure(call: Call<OrderPostSync>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(call: Call<OrderPostSync>, response: Response<OrderPostSync>) {
+                if (response.isSuccessful) {
+                    val ops = response.body()
+                    if (ops !=null && ops.success == 1) {
+                        // Order successful
+                        deleteCartData()
+
+                        // TODO GO to order fragment
+                        val intent = Intent(this@CheckoutActivity, HomeActivity::class.java)
+                        intent.putExtra("is_order_posted", true)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        startActivity(intent)
+
+                    }else {
+                        // TODO Order successfully not posted
+
+                    }
+
+                }else {
+                    // TODO Order successfully not posted
+                }
+            }
+
+        })
+
+
+    }
+
+    private fun deleteCartData() {
+        Thread {
+            AppDb.getInstance(this).cartItemDao().deleteAll()
+        }.start()
+    }
+
 
 }

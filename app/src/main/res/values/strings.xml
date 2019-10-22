@@ -26,4 +26,5 @@
     <string name="discount">Discount</string>
     <string name="delivery_charge">Delivery Charge</string>
     <string name="Total">Payable</string>
+    <string name="post_order">Post Order</string>
 </resources>

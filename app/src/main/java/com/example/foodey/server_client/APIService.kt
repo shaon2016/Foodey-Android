@@ -1,15 +1,13 @@
 package com.example.foodey.server_client
 
 import com.example.foodey.models.FoodSync
+import com.example.foodey.models.OrderPostSync
 import com.example.foodey.models.User
 import com.example.foodey.models.UserSync
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface APIService {
 
@@ -32,4 +30,19 @@ interface APIService {
         @Field("mobile")  mobile: String,
         @Field("password") passW: String) : Call<UserSync>
 
+
+    @FormUrlEncoded
+    @POST("post_order.php")
+    fun postOrder(
+        @Field("user_id") userId: Int,
+        @Field("cart_items_in_ja")  cartItemInJa: String,
+        @Field("total_price") totalPrice: Double,
+        @Field("discount") discount: Double,
+        @Field("vat") vat: Double
+
+
+    ) : Call<OrderPostSync>
+
+    @GET("orders.php")
+    fun getOrders(@Query("user_id") userId:Int) : Call<OrderSync>
 }
