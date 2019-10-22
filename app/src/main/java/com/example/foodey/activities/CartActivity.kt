@@ -52,6 +52,7 @@ class CartActivity : AppCompatActivity() {
         btnCheckOut.setOnClickListener {
             val intent = Intent(this, CheckoutActivity::class.java)
             intent.putExtra("cart_items", cartItems)
+            startActivity(intent)
         }
     }
 
