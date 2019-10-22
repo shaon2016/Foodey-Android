@@ -1,9 +1,6 @@
 package com.example.foodey.server_client
 
-import com.example.foodey.models.FoodSync
-import com.example.foodey.models.OrderPostSync
-import com.example.foodey.models.User
-import com.example.foodey.models.UserSync
+import com.example.foodey.models.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Response
