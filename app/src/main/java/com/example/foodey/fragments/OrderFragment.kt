@@ -6,17 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.foodey.R
+import com.example.foodey.adapter.OrderAdapter
 import com.example.foodey.data.P
 import com.example.foodey.models.OrderSync
 import com.example.foodey.server_client.APIService
 import com.example.foodey.server_client.RetroClient
+import kotlinx.android.synthetic.main.fragment_order.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class OrderFragment : Fragment() {
+    private lateinit var orderAdapter: OrderAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +32,9 @@ class OrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        orderAdapter = OrderAdapter(context!!, ArrayList())
+        rvOrders.layoutManager = LinearLayoutManager(context)
+        rvOrders.adapter = orderAdapter
         syncOrders()
     }
 
@@ -48,12 +55,10 @@ class OrderFragment : Fragment() {
                     os?.let {
                         val orders = os.orders
 
-                        // adapter.addAll(orders)
+                        orderAdapter.addCartUniquely(orders)
 
-
-                        //
                     }
-                }else {
+                } else {
 
                 }
             }

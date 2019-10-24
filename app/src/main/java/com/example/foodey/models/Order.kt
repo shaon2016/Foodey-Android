@@ -2,7 +2,7 @@ package com.example.foodey.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Orders(
+data class Order(
     @SerializedName("id")
     var orderId: Int,
     @SerializedName("user_id")
