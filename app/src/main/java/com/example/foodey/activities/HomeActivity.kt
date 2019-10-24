@@ -16,15 +16,9 @@ import com.example.foodey.R
 import com.example.foodey.adapter.FoodRVAdapter
 import com.example.foodey.data.P
 import com.example.foodey.fragments.HomeFragment
-import com.example.foodey.models.FoodSync
-import com.example.foodey.models.User
-import com.example.foodey.server_client.APIService
-import com.example.foodey.server_client.RetroClient
+import com.example.foodey.fragments.OrderFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.my_toolbar.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomeActivity : AppCompatActivity() {
 
@@ -81,8 +75,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initOrderListPage() {
-        //TODO create the order list fragment
-
+        initFragment(OrderFragment.newInstance())
     }
 
     private fun initHomePage() {
