@@ -26,6 +26,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_checkout.*
 import kotlinx.android.synthetic.main.my_toolbar.*
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -154,7 +156,14 @@ class CheckoutActivity : AppCompatActivity() {
     private fun confirmOrder() {
         val apiService = RetroClient.getInstance().create(APIService::class.java)
 
-        val call = apiService.postOrder(P.getUserId(this), "", totalPrice, discount, vat)
+
+        val call = apiService.postOrder(
+            P.getUserId(this),
+            getCartItemsInJaString(),
+            totalPrice,
+            discount,
+            vat
+        )
 
         call.enqueue(object : Callback<OrderPostSync> {
             override fun onFailure(call: Call<OrderPostSync>, t: Throwable) {
@@ -164,22 +173,23 @@ class CheckoutActivity : AppCompatActivity() {
             override fun onResponse(call: Call<OrderPostSync>, response: Response<OrderPostSync>) {
                 if (response.isSuccessful) {
                     val ops = response.body()
-                    if (ops !=null && ops.success == 1) {
+                    if (ops != null && ops.success == 1) {
                         // Order successful
                         deleteCartData()
 
                         // TODO GO to order fragment
                         val intent = Intent(this@CheckoutActivity, HomeActivity::class.java)
                         intent.putExtra("is_order_posted", true)
-                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
 
-                    }else {
+                    } else {
                         // TODO Order successfully not posted
 
                     }
 
-                }else {
+                } else {
                     // TODO Order successfully not posted
                 }
             }
@@ -187,6 +197,23 @@ class CheckoutActivity : AppCompatActivity() {
         })
 
 
+    }
+
+    private fun getCartItemsInJaString(): String {
+        val ja = JSONArray()
+        cart_Items.forEach { ct ->
+            val jo = JSONObject()
+
+            val food = AppDb.getInstance(this).foodDao().food(ct.foodId)
+            jo.put("id", food.id)
+            jo.put("name", food.name)
+            jo.put("price", food.price)
+            jo.put("quantity", ct.quantity)
+
+            ja.put(jo)
+        }
+
+        return ja.toString()
     }
 
     private fun deleteCartData() {
