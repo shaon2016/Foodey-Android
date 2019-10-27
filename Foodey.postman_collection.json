@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "f9759422-eeb4-49c5-bf52-a4d4a00fc70c",
+		"name": "Foodey",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign uo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "shaon",
+									"type": "text"
+								},
+								{
+									"key": "mobile",
+									"value": "014qaaasss",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "013",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{d}}login/views/signup.php",
+							"host": [
+								"{{d}}login"
+							],
+							"path": [
+								"views",
+								"signup.php"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Food",
+			"item": [
+				{
+					"name": "Foods",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{d}}data.php",
+							"host": [
+								"{{d}}data",
+								"php"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Post Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "cart_items_in_ja",
+									"value": "[{\"id\" : \"1\", \"name\" : \"Burger\", \"price\", \"250\", \"quantity\", \"1\"}]",
+									"type": "text"
+								},
+								{
+									"key": "total_price",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "discount",
+									"value": "50",
+									"type": "text"
+								},
+								{
+									"key": "vat",
+									"value": "23",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{d}}post_order.php",
+							"host": [
+								"{{d}}post_order",
+								"php"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{d}}orders.php?user_id=4",
+							"host": [
+								"{{d}}orders",
+								"php"
+							],
+							"query": [
+								{
+									"key": "user_id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

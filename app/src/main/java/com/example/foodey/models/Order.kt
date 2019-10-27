@@ -11,6 +11,8 @@ data class Order(
     var userId: Int,
     @SerializedName("items")
     var itemsStringJa: String,
+
+
     var itemsList: ArrayList<OrderedItem>,
     @SerializedName("payable_price")
     var payablePrice: Double,
@@ -20,16 +22,15 @@ data class Order(
     var createdAt: String
 ) {
 
+
     fun getOrderedItemList(): ArrayList<OrderedItem> {
-        if (itemsStringJa.isNotEmpty()) {
+        return if (itemsStringJa.isNotEmpty()) {
             val ja = JSONArray(itemsStringJa)
 
             itemsList = OrderedItem.parseOrderedItems(ja)
 
-            Log.d("items_ja", ja.toString())
-
-            return itemsList
-        } else return ArrayList()
+            itemsList
+        } else ArrayList()
     }
 
 
