@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,13 +23,55 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class FoodRVAdapter extends RecyclerView.Adapter<FoodRVAdapter.MyFoodVH> {
-
-    private ArrayList<Food> items;
+public class FoodRVAdapter extends RecyclerView.Adapter<FoodRVAdapter.MyFoodVH> implements Filterable {
+    public ArrayList<Food> items;
     private Context mContext;
+
+    private ArrayList<Food> itemListFiltered;
+
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+
+                if (charString.isEmpty()) {
+                    itemListFiltered = items;
+                } else {
+                    ArrayList<Food> filteredList = new ArrayList<>();
+
+                    for (int i = 0; i < items.size(); i++) {
+                        Food row = items.get(i);
+                        if (row.getName().toLowerCase().startsWith(charString.toLowerCase())) {
+                            filteredList.add(row);
+                        }
+
+                    }
+
+                    itemListFiltered = filteredList;
+                }
+
+
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = itemListFiltered;
+                return filterResults;
+
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                itemListFiltered = (ArrayList<Food>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
 
     public FoodRVAdapter(Context context, ArrayList<Food> foods) {
         items = foods;
+        itemListFiltered = foods;
         mContext = context;
     }
 
@@ -46,34 +90,35 @@ public class FoodRVAdapter extends RecyclerView.Adapter<FoodRVAdapter.MyFoodVH> 
     }
 
     private Food getItem(int pos) {
-        return items.get(pos);
+        return itemListFiltered.get(pos);
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return itemListFiltered.size();
     }
 
     public void addUniquely(@NotNull ArrayList<Food> newFoods) {
         ArrayList<Food> oldFoods = items;
 
-        for (int i = 0; i < newFoods.size(); i++ ) {
+        for (int i = 0; i < newFoods.size(); i++) {
             boolean isExists = false;
-            for (int j = 0 ; j < oldFoods.size(); j++) {
-                if (oldFoods.get(j).getId() == newFoods.get(i).getId() ) {
+            for (int j = 0; j < oldFoods.size(); j++) {
+                if (oldFoods.get(j).getId() == newFoods.get(i).getId()) {
                     // Exists in old food list
                     isExists = true;
                     break;
                 }
             }
             // Adding new food to view
-            if (!isExists)  {
+            if (!isExists) {
                 items.add(newFoods.get(i));
             }
         }
 
         notifyDataSetChanged();
     }
+
 
     class MyFoodVH extends RecyclerView.ViewHolder {
         TextView tvTitle;
