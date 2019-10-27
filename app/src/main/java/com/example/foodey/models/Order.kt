@@ -20,14 +20,17 @@ data class Order(
     var createdAt: String
 ) {
 
-    init {
+    fun getOrderedItemList(): ArrayList<OrderedItem> {
         if (itemsStringJa.isNotEmpty()) {
             val ja = JSONArray(itemsStringJa)
 
             itemsList = OrderedItem.parseOrderedItems(ja)
 
-            Log.d("DATATAG", ja.toString())
-        }
+            Log.d("items_ja", ja.toString())
+
+            return itemsList
+        } else return ArrayList()
     }
+
 
 }

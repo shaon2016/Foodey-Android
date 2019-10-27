@@ -58,14 +58,17 @@ class OrderAdapter(val context: Context, val items : ArrayList<Order>)
             tvTotal.text = "${item.payablePrice} BDT"
             tvDiscount.text = "${item.discount} BDT"
 
-            showOrderedItems(item.itemsList)
+            showOrderedItems(item.getOrderedItemList())
         }
 
         private fun showOrderedItems(orderedItems: java.util.ArrayList<OrderedItem>) {
-            rvOrderedFoods.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            if (!orderedItems.isNullOrEmpty()) {
+                rvOrderedFoods.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-            val adapter = OrderedItemAdapter(context, orderedItems)
-            rvOrderedFoods.adapter = adapter
+                val adapter = OrderedItemAdapter(context, orderedItems)
+                rvOrderedFoods.adapter = adapter
+            }
+
         }
 
     }
