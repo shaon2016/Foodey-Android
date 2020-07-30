@@ -10,8 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.androidbatch4day7.data.db.AppDb
 import com.example.foodey.R
+import com.example.foodey.data.db.AppDb
 import com.example.foodey.models.CartItem
 
 

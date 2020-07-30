@@ -11,10 +11,10 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
-import com.example.androidbatch4day7.data.db.AppDb
 import com.example.foodey.R
 import com.example.foodey.adapter.CheckOutAdapter
 import com.example.foodey.data.P
+import com.example.foodey.data.db.AppDb
 import com.example.foodey.models.CartItem
 import com.example.foodey.models.OrderPostSync
 import com.example.foodey.server_client.APIService

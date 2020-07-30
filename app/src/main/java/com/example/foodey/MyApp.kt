@@ -1,20 +1,12 @@
 package com.example.foodey
 
-import android.app.Application
 import com.example.foodey.di.DaggerAppComponent
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
+import dagger.android.AndroidInjector
+import dagger.android.DaggerApplication
 
-class MyApp : Application(), HasAndroidInjector {
+class MyApp : DaggerApplication() {
 
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
-
-    override fun androidInjector() = dispatchingAndroidInjector
-
-    override fun onCreate() {
-        super.onCreate()
-
-        // this can be called after the AppComponent setup and rebuild the project
-        DaggerAppComponent.create().inject(this)
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return  DaggerAppComponent.builder().application(this).build()
     }
 }

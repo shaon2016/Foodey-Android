@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.androidbatch4day7.data.db.AppDb
 import com.example.foodey.R
 import com.example.foodey.adapter.CartAdapter
+import com.example.foodey.data.db.AppDb
 import com.example.foodey.models.CartItem
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

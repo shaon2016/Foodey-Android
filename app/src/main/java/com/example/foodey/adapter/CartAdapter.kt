@@ -8,8 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.androidbatch4day7.data.db.AppDb
 import com.example.foodey.R
+import com.example.foodey.data.db.AppDb
 import com.example.foodey.models.CartItem
 
 

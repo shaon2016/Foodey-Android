@@ -2,6 +2,7 @@ package com.example.foodey.ui.home
 
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,24 +14,28 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.androidbatch4day7.data.db.AppDb
 
 import com.example.foodey.R
 import com.example.foodey.adapter.FoodRVAdapter
 import com.example.foodey.models.Food
-import com.example.foodey.models.FoodSync
-import com.example.foodey.server_client.APIService
-import com.example.foodey.server_client.RetroClient
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_home.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 class HomeFragment : Fragment() {
     private lateinit var foodAdapter: FoodRVAdapter
 
-    private lateinit var homeVM: HomeVM
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    private val homeVM by lazy {
+        ViewModelProvider(requireActivity(), viewModelFactory).get(HomeVM::class.java)
+    }
+
+    override fun onAttach(context: Context) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,7 +86,6 @@ class HomeFragment : Fragment() {
 
 
     private fun initVar() {
-        homeVM = ViewModelProvider(requireActivity()).get(HomeVM::class.java)
         foodAdapter = FoodRVAdapter(context!!, ArrayList())
     }
 
