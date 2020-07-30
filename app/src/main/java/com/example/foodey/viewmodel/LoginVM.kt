@@ -84,55 +84,9 @@ class LoginVM(application: Application) : AndroidViewModel(application) {
 
                 })
 
-            /*apiService.login(mobile_.value!!, password_.value!!)
-                .enqueue(object : Callback<User> {
-                    override fun onFailure(call: Call<User>, t: Throwable) {
-                        isDataLoading_.value = false
-                        toastMsg_.value = "Server error"
-
-                        t.printStackTrace()
-                    }
-
-                    override fun onResponse(call: Call<User>, response: Response<User>) {
-                        isDataLoading_.value = false
-
-                        if (response.isSuccessful) {
-                            val user = response.body()
-
-                            user?.let { u ->
-                                val msg = u.msg
-
-                                when (u.succeess) {
-                                    0 -> {
-                                        toastMsg_.value = msg
-                                    }
-
-                                    1 -> {
-                                        u.id = u.succeess
-                                        P.saveLoginResponse(getApplication(), u)
-                                        toastMsg_.value = msg
-                                        redirectToHomePage_.value = true
-                                    }
-                                    else -> {
-
-                                    }
-                                }
-                            }
-
-                        } else {
-                            toastMsg_.value = "Login is not successfull"
-
-                        }
-
-                    }
-                })
-
-*/
         } else {
             toastMsg_.value = "Mobile and password is empty"
         }
-
-
     }
 
     private fun isLoginValidate(): Boolean {
