@@ -1,30 +1,30 @@
-package com.example.foodey.activities
+package com.example.foodey.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.foodey.R
-import com.example.foodey.adapter.FoodRVAdapter
+import com.example.foodey.activities.CartActivity
+import com.example.foodey.ui.login.LoginActivity
 import com.example.foodey.data.P
-import com.example.foodey.fragments.HomeFragment
+import com.example.foodey.ui.home.HomeFragment
 import com.example.foodey.fragments.OrderFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.my_toolbar.*
 
-class HomeActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private var isOrderPosted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // No need to inject this
+        // Because we are not injecting anything in this activity
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

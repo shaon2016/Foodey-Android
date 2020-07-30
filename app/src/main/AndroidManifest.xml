@@ -21,8 +21,8 @@
         <activity
             android:name=".activities.SignUpActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.login.LoginActivity" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">

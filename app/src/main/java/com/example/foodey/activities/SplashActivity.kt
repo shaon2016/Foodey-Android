@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import com.example.foodey.R
 import com.example.foodey.data.P
+import com.example.foodey.ui.MainActivity
+import com.example.foodey.ui.login.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -16,7 +18,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             if (P.isLoggedIn(this)) {
-                startActivity(Intent(this, HomeActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))

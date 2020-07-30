@@ -1,20 +1,16 @@
-package com.example.foodey.activities
+package com.example.foodey.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.foodey.R
-import com.example.foodey.data.P
+import com.example.foodey.activities.SignUpActivity
+import com.example.foodey.ui.MainActivity
 import com.example.foodey.util.obtainViewModel
-import com.example.foodey.viewmodel.LoginVM
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlin.math.log
 
 class LoginActivity : AppCompatActivity() {
 
@@ -42,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         })
 
         loginVM.redirectToHomePage.observe(this, Observer {
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         })
 

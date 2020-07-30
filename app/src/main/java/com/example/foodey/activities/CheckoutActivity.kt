@@ -6,8 +6,6 @@ import android.os.Bundle
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -21,6 +19,7 @@ import com.example.foodey.models.CartItem
 import com.example.foodey.models.OrderPostSync
 import com.example.foodey.server_client.APIService
 import com.example.foodey.server_client.RetroClient
+import com.example.foodey.ui.MainActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -178,7 +177,7 @@ class CheckoutActivity : AppCompatActivity() {
                         deleteCartData()
 
                         // TODO GO to order fragment
-                        val intent = Intent(this@CheckoutActivity, HomeActivity::class.java)
+                        val intent = Intent(this@CheckoutActivity, MainActivity::class.java)
                         intent.putExtra("is_order_posted", true)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK

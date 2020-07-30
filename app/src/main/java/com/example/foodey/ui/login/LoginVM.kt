@@ -1,4 +1,4 @@
-package com.example.foodey.viewmodel
+package com.example.foodey.ui.login
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

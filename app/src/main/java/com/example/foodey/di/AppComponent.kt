@@ -1,6 +1,8 @@
 package com.example.foodey.di
 
 import com.example.foodey.MyApp
+import com.example.foodey.ui.home.HomeFragment
+import com.example.foodey.fragments.OrderFragment
 import dagger.Component
 import dagger.android.AndroidInjector
 import dagger.android.support.AndroidSupportInjectionModule
@@ -17,4 +19,7 @@ import dagger.android.support.AndroidSupportInjectionModule
     ]
 )
 interface AppComponent : AndroidInjector<MyApp> {
+
+    fun inject(frag: HomeFragment)
+    fun inject(frag: OrderFragment)
 }

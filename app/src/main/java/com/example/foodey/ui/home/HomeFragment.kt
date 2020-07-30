@@ -1,4 +1,4 @@
-package com.example.foodey.fragments
+package com.example.foodey.ui.home
 
 
 import android.annotation.SuppressLint
@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.androidbatch4day7.data.db.AppDb
 
@@ -19,16 +21,16 @@ import com.example.foodey.models.Food
 import com.example.foodey.models.FoodSync
 import com.example.foodey.server_client.APIService
 import com.example.foodey.server_client.RetroClient
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 class HomeFragment : Fragment() {
     private lateinit var foodAdapter: FoodRVAdapter
+
+    private lateinit var homeVM: HomeVM
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,45 +50,14 @@ class HomeFragment : Fragment() {
         rvFoods.layoutManager = GridLayoutManager(context!!, 2)
         rvFoods.adapter = foodAdapter
 
-        syncFoods()
+        homeVM.syncFoods()
         initSearch()
 
-    }
-
-    private fun syncFoods() {
-        val apiService = RetroClient.getInstance().create(APIService::class.java)
-
-        apiService.getFoods()
-            .enqueue(object : Callback<FoodSync> {
-                override fun onFailure(call: Call<FoodSync>, t: Throwable) {
-
-                }
-
-                override fun onResponse(call: Call<FoodSync>, response: Response<FoodSync>) {
-                    if (response.isSuccessful) {
-                        val fs = response.body()
-
-                        fs?.let {
-                            Log.d("DATATAG", fs.toString())
-                            when (fs.success) {
-                                1 -> {
-                                    foodAdapter.addUniquely(fs.foods)
-                                    insertIntoFoodTable(fs.foods)
-                                }
-                                0 -> {
-
-                                }
-                                else -> {
-
-                                }
-                            }
-                        }
-
-                    } else {
-
-                    }
-                }
-            })
+        homeVM.foods.observe(requireActivity(), Observer {
+            it?.let {
+                foodAdapter.addUniquely(it as java.util.ArrayList<Food>)
+            }
+        })
     }
 
     private fun initSearch() {
@@ -108,17 +79,10 @@ class HomeFragment : Fragment() {
         })
     }
 
-    @SuppressLint("CheckResult")
-    private fun insertIntoFoodTable(foods: java.util.ArrayList<Food>) {
-        Thread {
-            AppDb.getInstance(context!!).foodDao().insertAll(foods)
-        }.start()
-    }
 
     private fun initVar() {
+        homeVM = ViewModelProvider(requireActivity()).get(HomeVM::class.java)
         foodAdapter = FoodRVAdapter(context!!, ArrayList())
-
-
     }
 
 
