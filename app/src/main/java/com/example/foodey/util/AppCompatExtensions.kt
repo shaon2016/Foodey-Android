@@ -6,5 +6,5 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 
 fun <T : ViewModel> AppCompatActivity.obtainViewModel(viewModelClass: Class<T>) =
-    ViewModelProviders.of(this,
+    ViewModelProvider(this,
         ViewModelProvider.AndroidViewModelFactory.getInstance(application)).get(viewModelClass)
