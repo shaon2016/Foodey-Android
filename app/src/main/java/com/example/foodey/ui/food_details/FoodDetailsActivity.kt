@@ -7,30 +7,42 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.foodey.R
 import com.example.foodey.data.db.AppDb
 import com.example.foodey.models.CartItem
 import com.example.foodey.models.Food
 import com.example.foodey.ui.cart.CartActivity
+import com.example.foodey.util.obtainViewModel
+import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_food_details.*
+import javax.inject.Inject
 
 class FoodDetailsActivity : AppCompatActivity() {
 
     private lateinit var f: Food
 
+    @Inject lateinit var viewmodelFactory : ViewModelProvider.Factory
+
+    private val vm by lazy { obtainViewModel(DetailsVM::class.java, viewmodelFactory) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_details)
 
         f = intent?.extras?.getSerializable("getCartItem") as Food
 
+        vm.setFood(f)
+
 
         btnAddToCart.setOnClickListener {
-            saveIntoCart()
+            vm.addToCart()
         }
 
         tvTitleDetails.text = f.name
@@ -40,29 +52,15 @@ class FoodDetailsActivity : AppCompatActivity() {
             .load(f.image)
             .into(ivFoodDetails)
 
-    }
-
-    @SuppressLint("CheckResult")
-    private fun saveIntoCart() {
-        Observable.fromCallable {
-            val cartItemDao = AppDb.getInstance(this).cartItemDao()
-            // Checking getCartItem already exists or not
-            var cartItem = cartItemDao.getCartItem(f.id)
-
-            if (cartItem != null && cartItem.id > 0) {
-                cartItem.quantity++
-            } else {
-                cartItem = CartItem(f.id, 1)
+        vm.toast.observe(this, Observer {
+            it?.let {
+                Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
             }
-            cartItemDao.insert(cartItem)
-        }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                Toast.makeText(this, "Added to cart", Toast.LENGTH_SHORT).show()
-            }, {
-                it.printStackTrace()
-            })
+        })
+
     }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)

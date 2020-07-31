@@ -2,6 +2,7 @@ package com.example.foodey.di.module
 
 import com.example.foodey.ui.cart.CartActivity
 import com.example.foodey.ui.checkout.CheckoutActivity
+import com.example.foodey.ui.food_details.FoodDetailsActivity
 import com.example.foodey.ui.login.LoginActivity
 import com.example.foodey.ui.signup.SignUpActivity
 import dagger.Module
@@ -21,4 +22,7 @@ abstract class ActivityBindingModule {
 
     @ContributesAndroidInjector
     abstract fun signUpActivityBinding() : SignUpActivity
+
+    @ContributesAndroidInjector
+    abstract fun FoodDetailsActivityBinding() : FoodDetailsActivity
 }

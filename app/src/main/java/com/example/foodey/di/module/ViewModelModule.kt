@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.foodey.di.annotation.ViewModelKey
 import com.example.foodey.ui.cart.CartVM
 import com.example.foodey.ui.checkout.CheckoutVM
+import com.example.foodey.ui.food_details.DetailsVM
 import com.example.foodey.ui.home.HomeVM
 import com.example.foodey.ui.login.LoginVM
 import com.example.foodey.ui.order.OrderVM
@@ -52,6 +53,10 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(OrderVM::class)
     abstract fun bindOrderViewModel(orderVM: OrderVM): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailsVM::class)
+    abstract fun bindDetailsViewModel(detailsVM: DetailsVM): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(viewModelFactory: ViewModelFactory): ViewModelProvider.Factory
