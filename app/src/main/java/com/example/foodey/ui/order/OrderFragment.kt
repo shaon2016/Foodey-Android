@@ -3,7 +3,6 @@ package com.example.foodey.ui.order
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,19 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.foodey.R
-import com.example.foodey.adapter.OrderAdapter
-import com.example.foodey.data.P
-import com.example.foodey.di.annotation.ViewModelKey
 import com.example.foodey.models.Order
-import com.example.foodey.models.OrderSync
-import com.example.foodey.server_client.APIService
-import com.example.foodey.server_client.RetroClient
-import com.example.foodey.viewmodel.ViewModelFactory
+import com.example.foodey.util.obtainViewModel
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_order.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
 class OrderFragment : Fragment() {
@@ -34,7 +24,8 @@ class OrderFragment : Fragment() {
     @Inject lateinit var viewmodelFactory : ViewModelProvider.Factory
 
     private val  orderVM by lazy {
-        ViewModelProvider(requireActivity(), viewmodelFactory).get(OrderVM::class.java)
+        obtainViewModel(OrderVM::class.java, viewmodelFactory)
+
     }
 
     override fun onAttach(context: Context) {
@@ -52,7 +43,8 @@ class OrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        orderAdapter = OrderAdapter(context!!, ArrayList())
+        orderAdapter =
+            OrderAdapter(context!!, ArrayList())
         rvOrders.layoutManager = LinearLayoutManager(context)
         rvOrders.adapter = orderAdapter
 

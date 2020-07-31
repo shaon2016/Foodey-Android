@@ -8,9 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodey.R
 import com.example.foodey.ui.checkout.CheckoutActivity
-import com.example.foodey.adapter.CartAdapter
 import com.example.foodey.models.CartItem
 import com.example.foodey.util.SimpleCallback
+import com.example.foodey.util.obtainViewModel
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_cart.*
 import javax.inject.Inject
@@ -22,7 +22,7 @@ class CartActivity : AppCompatActivity() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val vm by lazy {
-        ViewModelProvider(this, viewModelFactory).get(CartVM::class.java)
+        obtainViewModel(CartVM::class.java, viewModelFactory)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

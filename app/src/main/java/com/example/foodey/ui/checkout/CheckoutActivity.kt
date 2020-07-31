@@ -6,7 +6,6 @@ import android.os.Bundle
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.content.ContextCompat
@@ -15,10 +14,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.example.foodey.R
-import com.example.foodey.adapter.CheckOutAdapter
 import com.example.foodey.models.CartItem
 import com.example.foodey.ui.MainActivity
 import com.example.foodey.util.SimpleCallback
+import com.example.foodey.util.obtainViewModel
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_checkout.*
 import kotlinx.android.synthetic.main.my_toolbar.*
@@ -29,7 +28,7 @@ class CheckoutActivity : AppCompatActivity() {
     @Inject
     lateinit var viewmodelFactory: ViewModelProvider.Factory
     private val vm by lazy {
-        ViewModelProvider(this, viewmodelFactory).get(CheckoutVM::class.java)
+        obtainViewModel(CheckoutVM::class.java, viewmodelFactory)
     }
 
     private lateinit var adapter: CheckOutAdapter
@@ -125,7 +124,8 @@ class CheckoutActivity : AppCompatActivity() {
 
 
     private fun initVar() {
-        adapter = CheckOutAdapter(this, ArrayList())
+        adapter =
+            CheckOutAdapter(this, ArrayList())
     }
 
     private fun postOrder() {

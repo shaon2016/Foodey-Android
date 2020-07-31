@@ -1,15 +1,12 @@
 package com.example.foodey.ui.login
 
 import android.app.Application
-import android.view.View
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.foodey.data.P
 import com.example.foodey.models.UserSync
 import com.example.foodey.server_client.APIService
-import com.example.foodey.server_client.RetroClient
 import com.example.foodey.util.U
 import retrofit2.Call
 import retrofit2.Callback

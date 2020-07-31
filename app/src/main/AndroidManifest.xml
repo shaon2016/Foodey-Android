@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.checkout.CheckoutActivity" />
-        <activity android:name=".activities.FoodDetailsActivity" />
+        <activity android:name=".ui.food_details.FoodDetailsActivity" />
         <activity android:name=".ui.cart.CartActivity" />
         <activity
             android:name=".ui.signup.SignUpActivity"
@@ -24,7 +24,7 @@
         <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.login.LoginActivity" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

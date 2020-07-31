@@ -1,4 +1,4 @@
-package com.example.foodey.adapter
+package com.example.foodey.ui.cart
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.foodey.R
-import com.example.foodey.data.db.AppDb
 import com.example.foodey.models.CartItem
 import com.example.foodey.util.SimpleCallback
 

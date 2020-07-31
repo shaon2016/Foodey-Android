@@ -1,7 +1,6 @@
 package com.example.foodey.ui.order
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +8,6 @@ import com.example.foodey.data.P
 import com.example.foodey.models.Order
 import com.example.foodey.models.OrderSync
 import com.example.foodey.server_client.APIService
-import com.example.foodey.server_client.RetroClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

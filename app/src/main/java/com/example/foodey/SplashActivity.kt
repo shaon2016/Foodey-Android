@@ -1,10 +1,9 @@
-package com.example.foodey.activities
+package com.example.foodey
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.example.foodey.R
 import com.example.foodey.data.P
 import com.example.foodey.ui.MainActivity
 import com.example.foodey.ui.login.LoginActivity

@@ -1,12 +1,10 @@
 package com.example.foodey.ui.home
 
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.foodey.R
-import com.example.foodey.adapter.FoodRVAdapter
 import com.example.foodey.models.Food
+import com.example.foodey.util.obtainViewModel
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
@@ -27,9 +25,7 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val homeVM by lazy {
-        ViewModelProvider(requireActivity(), viewModelFactory).get(HomeVM::class.java)
-    }
+    private val homeVM by lazy { obtainViewModel(HomeVM::class.java, viewModelFactory) }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -85,7 +81,8 @@ class HomeFragment : Fragment() {
 
 
     private fun initVar() {
-        foodAdapter = FoodRVAdapter(context!!, ArrayList())
+        foodAdapter =
+            FoodRVAdapter(context!!, ArrayList())
     }
 
 

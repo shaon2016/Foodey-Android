@@ -1,4 +1,4 @@
-package com.example.foodey.adapter
+package com.example.foodey.ui.order
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -13,8 +13,12 @@ class OrderedItemAdapter(val context: Context, val items : ArrayList<OrderedItem
     : RecyclerView.Adapter<OrderedItemAdapter.MyOrderedVH>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyOrderedVH {
-        return MyOrderedVH(LayoutInflater.from(parent.context).inflate(R.layout.rv_ordered_item,
-            parent, false))
+        return MyOrderedVH(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.rv_ordered_item,
+                parent, false
+            )
+        )
     }
 
     override fun getItemCount() = items.size

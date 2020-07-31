@@ -1,4 +1,4 @@
-package com.example.foodey.adapter
+package com.example.foodey.ui.checkout
 
 import android.content.Context
 import android.view.LayoutInflater

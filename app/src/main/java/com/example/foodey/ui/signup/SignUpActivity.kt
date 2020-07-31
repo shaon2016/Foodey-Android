@@ -16,10 +16,11 @@ import javax.inject.Inject
 
 class SignUpActivity : AppCompatActivity() {
 
-    @Inject lateinit var viewmodelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewmodelFactory: ViewModelProvider.Factory
 
     private val signUpVM by lazy {
-        ViewModelProvider(this, viewmodelFactory).get(SignUpVM::class.java)
+        obtainViewModel(SignUpVM::class.java, viewmodelFactory)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

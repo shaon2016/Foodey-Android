@@ -1,4 +1,4 @@
-package com.example.foodey.adapter
+package com.example.foodey.ui.order
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -65,7 +65,10 @@ class OrderAdapter(val context: Context, val items : ArrayList<Order>)
             if (!orderedItems.isNullOrEmpty()) {
                 rvOrderedFoods.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-                val adapter = OrderedItemAdapter(context, orderedItems)
+                val adapter = OrderedItemAdapter(
+                    context,
+                    orderedItems
+                )
                 rvOrderedFoods.adapter = adapter
             }
 

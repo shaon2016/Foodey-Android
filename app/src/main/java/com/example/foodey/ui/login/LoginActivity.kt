@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     @Inject lateinit var viewmodelFactory : ViewModelProvider.Factory
 
     private val  loginVM by lazy {
-        ViewModelProvider(this, viewmodelFactory).get(LoginVM::class.java)
+        obtainViewModel(LoginVM::class.java, viewmodelFactory)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

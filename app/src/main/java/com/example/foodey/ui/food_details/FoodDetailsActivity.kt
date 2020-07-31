@@ -1,4 +1,4 @@
-package com.example.foodey.activities
+package com.example.foodey.ui.food_details
 
 import android.annotation.SuppressLint
 import android.content.Intent
