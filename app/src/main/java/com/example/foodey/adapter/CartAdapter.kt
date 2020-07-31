@@ -11,12 +11,12 @@ import com.bumptech.glide.Glide
 import com.example.foodey.R
 import com.example.foodey.data.db.AppDb
 import com.example.foodey.models.CartItem
+import com.example.foodey.util.SimpleCallback
 
 
 class CartAdapter(
     val context: Context,
-    val items: ArrayList<CartItem>,
-    private val db: AppDb
+    val items: ArrayList<CartItem>
 ) :
     RecyclerView.Adapter<CartAdapter.MyCartVH>() {
 
@@ -38,11 +38,6 @@ class CartAdapter(
         items.addAll(cartItems)
         notifyDataSetChanged()
     }
-
-    fun addUniquely(newItems: List<CartItem>) {
-
-    }
-
 
     fun refreshWith(items: List<CartItem>) {
         this.items.clear()
@@ -82,13 +77,13 @@ class CartAdapter(
         }
 
         private fun updateCT(ct: CartItem) {
-            Thread {
-                db.cartItemDao().insert(ct)
-            }.start()
+            cartUpdateListener?.callback(ct)
         }
 
         private fun setQuantityToView(quantity: Int) {
             tvQuantity.text = quantity.toString()
         }
     }
+
+    var cartUpdateListener : SimpleCallback<CartItem>? = null
 }

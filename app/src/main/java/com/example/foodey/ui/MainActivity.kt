@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.example.foodey.R
-import com.example.foodey.activities.CartActivity
+import com.example.foodey.ui.cart.CartActivity
 import com.example.foodey.ui.login.LoginActivity
 import com.example.foodey.data.P
 import com.example.foodey.ui.home.HomeFragment

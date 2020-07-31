@@ -16,6 +16,9 @@ interface CartItemDao {
     @Query("select * from cart_item")
     fun all() : LiveData<List<CartItem>>
 
+    @Query("select * from cart_item")
+    fun all1() : List<CartItem>
+
     @Query("select * from cart_item where food_id = :foodId")
     fun getCartItem(foodId:Int) : CartItem?
 

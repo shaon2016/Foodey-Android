@@ -2,10 +2,7 @@ package com.example.foodey.di
 
 import android.app.Application
 import com.example.foodey.MyApp
-import com.example.foodey.di.module.AppModule
-import com.example.foodey.di.module.DbModule
-import com.example.foodey.di.module.FragmentsBindingModule
-import com.example.foodey.di.module.ViewModelModule
+import com.example.foodey.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -25,7 +22,8 @@ import javax.inject.Singleton
         ViewModelModule::class,
         FragmentsBindingModule::class,
         DbModule::class,
-        AppModule::class
+        AppModule::class,
+        ActivityBindingModule::class
     ]
 )
 interface AppComponent : AndroidInjector<MyApp> {

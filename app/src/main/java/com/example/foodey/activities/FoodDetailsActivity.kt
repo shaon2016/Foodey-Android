@@ -12,6 +12,7 @@ import com.example.foodey.R
 import com.example.foodey.data.db.AppDb
 import com.example.foodey.models.CartItem
 import com.example.foodey.models.Food
+import com.example.foodey.ui.cart.CartActivity
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
