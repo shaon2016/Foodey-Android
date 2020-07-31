@@ -1,5 +1,6 @@
 package com.example.foodey.ui.order
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,8 +13,9 @@ import com.example.foodey.server_client.RetroClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class OrderVM : ViewModel() {
+class OrderVM @Inject constructor(val context: Context) : ViewModel() {
 
     private val _orders = MutableLiveData<List<Order>>()
     val orders: LiveData<List<Order>> get() = _orders
@@ -25,8 +27,7 @@ class OrderVM : ViewModel() {
         _isLoading.value = true
 
         val service = RetroClient.getInstance().create(APIService::class.java)
-//        val call = service.getOrders(P.getUserId(context!!))
-        val call = service.getOrders(1)
+        val call = service.getOrders(P.getUserId(context))
         call.enqueue(object : Callback<OrderSync> {
             override fun onFailure(call: Call<OrderSync>, t: Throwable) {
                 t.printStackTrace()

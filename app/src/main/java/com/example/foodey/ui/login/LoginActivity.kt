@@ -6,31 +6,33 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.foodey.R
-import com.example.foodey.activities.SignUpActivity
+import com.example.foodey.ui.signup.SignUpActivity
 import com.example.foodey.ui.MainActivity
 import com.example.foodey.util.obtainViewModel
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_login.*
+import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var loginVM: LoginVM
+    @Inject lateinit var viewmodelFactory : ViewModelProvider.Factory
+
+    private val  loginVM by lazy {
+        ViewModelProvider(this, viewmodelFactory).get(LoginVM::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
-
-        initVar()
 
         initView()
 
     }
 
-
-    private fun initVar() {
-        loginVM = obtainViewModel(LoginVM::class.java)
-    }
 
     private fun initView() {
         loginVM.toastMsg.observe(this, Observer { msg ->

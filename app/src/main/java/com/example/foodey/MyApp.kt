@@ -1,6 +1,6 @@
 package com.example.foodey
 
-import com.example.foodey.di.DaggerAppComponent
+import com.example.foodey.di.component.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 

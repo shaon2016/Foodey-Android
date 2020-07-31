@@ -1,4 +1,4 @@
-package com.example.foodey.activities
+package com.example.foodey.ui.signup
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,21 +6,27 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.foodey.R
 import com.example.foodey.ui.MainActivity
 import com.example.foodey.util.obtainViewModel
-import com.example.foodey.viewmodel.SignUpVM
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import javax.inject.Inject
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var signUpVM: SignUpVM
+    @Inject lateinit var viewmodelFactory: ViewModelProvider.Factory
+
+    private val signUpVM by lazy {
+        ViewModelProvider(this, viewmodelFactory).get(SignUpVM::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-        initVar()
         initView()
     }
 
@@ -54,8 +60,5 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun initVar() {
-        signUpVM = obtainViewModel(SignUpVM::class.java)
-    }
 
 }

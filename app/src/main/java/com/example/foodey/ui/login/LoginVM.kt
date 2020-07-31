@@ -1,9 +1,11 @@
 package com.example.foodey.ui.login
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.foodey.data.P
 import com.example.foodey.models.UserSync
 import com.example.foodey.server_client.APIService
@@ -12,8 +14,9 @@ import com.example.foodey.util.U
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class LoginVM(application: Application) : AndroidViewModel(application) {
+class LoginVM @Inject constructor(val application: Application) : ViewModel() {
 
     private val mobile_ = MutableLiveData<String>()
     val mobile: LiveData<String> = mobile_
@@ -66,7 +69,7 @@ class LoginVM(application: Application) : AndroidViewModel(application) {
 
                                     1 -> {
                                         val user = userSync.user
-                                        P.saveLoginResponse(getApplication(), user)
+                                        P.saveLoginResponse(application, user)
                                         toastMsg_.value = msg
                                         redirectToHomePage_.value = true
                                     }

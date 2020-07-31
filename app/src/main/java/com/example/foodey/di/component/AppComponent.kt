@@ -1,4 +1,4 @@
-package com.example.foodey.di
+package com.example.foodey.di.component
 
 import android.app.Application
 import com.example.foodey.MyApp
@@ -22,6 +22,8 @@ import javax.inject.Singleton
         ViewModelModule::class,
         FragmentsBindingModule::class,
         DbModule::class,
+        NetworkModule::class,
+        ApiModule::class,
         AppModule::class,
         ActivityBindingModule::class
     ]

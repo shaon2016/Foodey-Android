@@ -1,4 +1,4 @@
-package com.example.foodey.di
+package com.example.foodey.di.annotation
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

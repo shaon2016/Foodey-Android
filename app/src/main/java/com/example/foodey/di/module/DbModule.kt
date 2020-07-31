@@ -1,5 +1,6 @@
 package com.example.foodey.di.module
 
+import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -13,8 +14,8 @@ class DbModule {
 
     @Singleton
     @Provides
-    fun provideRoomDatabase(context: Context): AppDb {
-        return Room.databaseBuilder(context, AppDb::class.java, "appdb")
+    fun provideRoomDatabase(application: Application): AppDb {
+        return Room.databaseBuilder(application.applicationContext, AppDb::class.java, "appdb")
             .fallbackToDestructiveMigration()
             .build()
     }
