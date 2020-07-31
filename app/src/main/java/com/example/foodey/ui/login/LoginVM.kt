@@ -16,7 +16,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class LoginVM @Inject constructor(val application: Application) : ViewModel() {
+class LoginVM @Inject constructor(val application: Application, val apiService: APIService) :
+    ViewModel() {
 
     private val mobile_ = MutableLiveData<String>()
     val mobile: LiveData<String> = mobile_
@@ -41,8 +42,6 @@ class LoginVM @Inject constructor(val application: Application) : ViewModel() {
             // show progress bar
             isDataLoading_.value = true
             // save data to server
-
-            val apiService = RetroClient.getInstance().create(APIService::class.java)
 
             apiService.login(mobile_.value!!, password_.value!!)
                 .enqueue(object : Callback<UserSync> {

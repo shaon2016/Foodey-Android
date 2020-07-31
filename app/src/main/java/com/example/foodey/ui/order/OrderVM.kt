@@ -15,7 +15,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class OrderVM @Inject constructor(val context: Context) : ViewModel() {
+class OrderVM @Inject constructor(val context: Context, private val apiService: APIService) :
+    ViewModel() {
 
     private val _orders = MutableLiveData<List<Order>>()
     val orders: LiveData<List<Order>> get() = _orders
@@ -26,9 +27,7 @@ class OrderVM @Inject constructor(val context: Context) : ViewModel() {
     fun syncOrders() {
         _isLoading.value = true
 
-        val service = RetroClient.getInstance().create(APIService::class.java)
-        val call = service.getOrders(P.getUserId(context))
-        call.enqueue(object : Callback<OrderSync> {
+        apiService.getOrders(P.getUserId(context)).enqueue(object : Callback<OrderSync> {
             override fun onFailure(call: Call<OrderSync>, t: Throwable) {
                 t.printStackTrace()
             }

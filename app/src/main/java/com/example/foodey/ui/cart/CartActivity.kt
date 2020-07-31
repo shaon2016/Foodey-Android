@@ -7,16 +7,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodey.R
-import com.example.foodey.activities.CheckoutActivity
+import com.example.foodey.ui.checkout.CheckoutActivity
 import com.example.foodey.adapter.CartAdapter
-import com.example.foodey.data.db.AppDb
-import com.example.foodey.models.Cart
 import com.example.foodey.models.CartItem
 import com.example.foodey.util.SimpleCallback
 import dagger.android.AndroidInjection
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_cart.*
 import javax.inject.Inject
 

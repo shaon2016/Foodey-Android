@@ -13,14 +13,15 @@ import com.bumptech.glide.Glide
 import com.example.foodey.R
 import com.example.foodey.data.db.AppDb
 import com.example.foodey.models.CartItem
+import com.example.foodey.util.SimpleCallback
 
 
 class CheckOutAdapter(
     val context: Context,
-    val items: ArrayList<CartItem>,
-    private val db: AppDb
+    val items: ArrayList<CartItem>
 ) :
     RecyclerView.Adapter<CheckOutAdapter.MyCartVH>() {
+    var cartUpdateListener : SimpleCallback<CartItem>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCartVH {
         return MyCartVH(
@@ -162,9 +163,8 @@ class CheckOutAdapter(
         }
 
         private fun updateCT(ct: CartItem) {
-            Thread {
-                db.cartItemDao().insert(ct)
-            }.start()
+            cartUpdateListener?.callback(ct)
+
         }
 
 

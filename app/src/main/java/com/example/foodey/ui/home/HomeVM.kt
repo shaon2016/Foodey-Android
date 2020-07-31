@@ -1,8 +1,6 @@
 package com.example.foodey.ui.home
 
-import android.app.Application
-import android.util.Log
-import androidx.lifecycle.AndroidViewModel
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +8,6 @@ import com.example.androidbatch4day7.data.dao.FoodDao
 import com.example.foodey.models.Food
 import com.example.foodey.models.FoodSync
 import com.example.foodey.server_client.APIService
-import com.example.foodey.server_client.RetroClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +19,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class HomeVM @Inject constructor () : ViewModel() {
+class HomeVM @Inject constructor (private val apiService: APIService) : ViewModel() {
     @Inject lateinit var foodDao : FoodDao
 
     private val _foods = MutableLiveData<List<Food>>()
@@ -35,7 +32,6 @@ class HomeVM @Inject constructor () : ViewModel() {
     }
 
      fun syncFoods() {
-        val apiService = RetroClient.getInstance().create(APIService::class.java)
 
         apiService.getFoods()
             .enqueue(object : Callback<FoodSync> {

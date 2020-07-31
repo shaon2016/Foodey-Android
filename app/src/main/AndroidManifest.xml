@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.CheckoutActivity" />
+        <activity android:name=".ui.checkout.CheckoutActivity" />
         <activity android:name=".activities.FoodDetailsActivity" />
         <activity android:name=".ui.cart.CartActivity" />
         <activity

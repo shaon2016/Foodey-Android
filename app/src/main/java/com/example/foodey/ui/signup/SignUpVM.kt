@@ -7,14 +7,13 @@ import androidx.lifecycle.ViewModel
 import com.example.foodey.data.P
 import com.example.foodey.models.UserSync
 import com.example.foodey.server_client.APIService
-import com.example.foodey.server_client.RetroClient
 import com.example.foodey.util.U
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class SignUpVM @Inject constructor(val application: Application) : ViewModel() {
+class SignUpVM @Inject constructor(val application: Application, val apiService: APIService) : ViewModel() {
 
     private val name_ = MutableLiveData<String>()
 
@@ -38,8 +37,6 @@ class SignUpVM @Inject constructor(val application: Application) : ViewModel() {
             // show progress bar
             isDataLoading_.value = true
             // save data to server
-
-            val apiService = RetroClient.getInstance().create(APIService::class.java)
 
             apiService.signUp(name_.value!!, mobile_.value!!, password_.value!!)
                 .enqueue(object : Callback<UserSync> {
