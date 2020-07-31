@@ -24,5 +24,5 @@ abstract class ActivityBindingModule {
     abstract fun signUpActivityBinding() : SignUpActivity
 
     @ContributesAndroidInjector
-    abstract fun FoodDetailsActivityBinding() : FoodDetailsActivity
+    abstract fun foodDetailsActivityBinding() : FoodDetailsActivity
 }

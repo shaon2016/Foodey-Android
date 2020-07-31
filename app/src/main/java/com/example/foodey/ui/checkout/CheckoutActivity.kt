@@ -95,6 +95,9 @@ class CheckoutActivity : AppCompatActivity() {
         adapter.cartUpdateListener = SimpleCallback {
             vm.update(it)
         }
+        adapter.cartDeleteListener = SimpleCallback {
+            vm.delete(it)
+        }
     }
 
     private fun updateView(cartitems: java.util.ArrayList<CartItem>) {

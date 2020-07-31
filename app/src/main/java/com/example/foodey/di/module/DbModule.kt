@@ -20,7 +20,6 @@ class DbModule {
             .build()
     }
 
-
     @Singleton
     @Provides
     fun provideFoodDao(db: AppDb) = db.foodDao()

@@ -22,6 +22,7 @@ class CheckOutAdapter(
 ) :
     RecyclerView.Adapter<CheckOutAdapter.MyCartVH>() {
     var cartUpdateListener : SimpleCallback<CartItem>? = null
+    var cartDeleteListener : SimpleCallback<CartItem>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCartVH {
         return MyCartVH(
@@ -127,10 +128,7 @@ class CheckOutAdapter(
                     ).show()
 
 
-                    val db = AppDb.getInstance(context)
-                    db.cartItemDao().delete(ct)
-
-
+                    cartDeleteListener?.callback(ct)
 
                     items.remove(ct)
                     notifyDataSetChanged()

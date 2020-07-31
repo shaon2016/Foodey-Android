@@ -118,5 +118,11 @@ class CheckoutVM @Inject constructor(
         }
     }
 
+    fun delete(ct: CartItem) {
+        viewModelScope.launch(Dispatchers.IO) {
+            cartItemDao.delete(ct)
+        }
+    }
+
 
 }

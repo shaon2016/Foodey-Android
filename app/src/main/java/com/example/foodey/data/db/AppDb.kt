@@ -15,15 +15,4 @@ abstract class AppDb : RoomDatabase() {
     abstract fun foodDao(): FoodDao
     abstract fun cartItemDao() : CartItemDao
 
-    companion object {
-        private var instance: AppDb? = null
-
-        fun getInstance(context: Context) = if (instance == null) create(context) else instance!!
-
-        private fun create(context: Context) = Room.databaseBuilder(
-            context,
-            AppDb::class.java, "appdb")
-            .allowMainThreadQueries()
-            .build()
-    }
 }
