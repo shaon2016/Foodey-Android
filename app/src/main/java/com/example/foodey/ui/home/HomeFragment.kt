@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-
 import com.example.foodey.R
 import com.example.foodey.adapter.FoodRVAdapter
 import com.example.foodey.models.Food

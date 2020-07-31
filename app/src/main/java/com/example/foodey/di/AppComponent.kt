@@ -6,8 +6,6 @@ import com.example.foodey.di.module.AppModule
 import com.example.foodey.di.module.DbModule
 import com.example.foodey.di.module.FragmentsBindingModule
 import com.example.foodey.di.module.ViewModelModule
-import com.example.foodey.ui.home.HomeFragment
-import com.example.foodey.fragments.OrderFragment
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector

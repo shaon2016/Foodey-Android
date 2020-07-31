@@ -14,7 +14,7 @@ import com.example.foodey.activities.CartActivity
 import com.example.foodey.ui.login.LoginActivity
 import com.example.foodey.data.P
 import com.example.foodey.ui.home.HomeFragment
-import com.example.foodey.fragments.OrderFragment
+import com.example.foodey.ui.order.OrderFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.my_toolbar.*
 

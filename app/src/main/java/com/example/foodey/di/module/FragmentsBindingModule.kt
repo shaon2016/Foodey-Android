@@ -9,4 +9,6 @@ abstract class FragmentsBindingModule {
 
     @ContributesAndroidInjector
     abstract fun bindingHomeFragment() : HomeFragment
+
+
 }
