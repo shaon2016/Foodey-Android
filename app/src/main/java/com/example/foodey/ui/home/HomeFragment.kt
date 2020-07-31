@@ -58,6 +58,12 @@ class HomeFragment : Fragment() {
                 foodAdapter.addUniquely(it as java.util.ArrayList<Food>)
             }
         })
+
+        homeVM.isLoading.observe(requireActivity(), Observer {
+            it?.let {
+                pbFoods.visibility = if (it) View.VISIBLE else View.GONE
+            }
+        })
     }
 
     private fun initSearch() {

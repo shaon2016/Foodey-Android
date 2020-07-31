@@ -21,6 +21,7 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_food_details.*
+import kotlinx.android.synthetic.main.my_toolbar.*
 import javax.inject.Inject
 
 class FoodDetailsActivity : AppCompatActivity() {
@@ -35,6 +36,9 @@ class FoodDetailsActivity : AppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_food_details)
+
+        setSupportActionBar(toolbar)
+        title = "Details"
 
         f = intent?.extras?.getSerializable("getCartItem") as Food
 

@@ -25,6 +25,9 @@ class HomeVM @Inject constructor (private val apiService: APIService) : ViewMode
     private val _foods = MutableLiveData<List<Food>>()
     val foods: LiveData<List<Food>> get() = _foods
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     fun insertIntoFoodTable(foods: ArrayList<Food>) {
         CoroutineScope(Dispatchers.IO).launch {
             foodDao.insertAll(foods)
@@ -32,6 +35,7 @@ class HomeVM @Inject constructor (private val apiService: APIService) : ViewMode
     }
 
      fun syncFoods() {
+         _isLoading.value = true
 
         apiService.getFoods()
             .enqueue(object : Callback<FoodSync> {
@@ -41,6 +45,8 @@ class HomeVM @Inject constructor (private val apiService: APIService) : ViewMode
 
                 override fun onResponse(call: Call<FoodSync>, response: Response<FoodSync>) {
                     if (response.isSuccessful) {
+                        _isLoading.value = false
+
                         val fs = response.body()
 
                         fs?.let {
@@ -60,10 +66,11 @@ class HomeVM @Inject constructor (private val apiService: APIService) : ViewMode
                         }
 
                     } else {
-
+                        _isLoading.value = false
                     }
                 }
             })
+
     }
 
 }
